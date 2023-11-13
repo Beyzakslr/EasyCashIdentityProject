@@ -7,7 +7,7 @@
 }
 
 <div class="right_col" role="main">
-    <div class="">
+    
         <div class="page-title">
             <div class="title_left">
                 <h3>Easy Cash Müşteri Paneli</h3>
@@ -114,6 +114,12 @@
                                 <div class="col-md-6 col-sm-6 col-xs-12">
                                     <input id="password" type="password" asp-for="Password" data-validate-length="6,8" class="form-control col-md-7 col-xs-12" required="required">
                                 </div>
+                            <div class="item form-group">
+                                <label for="password" class="control-label col-md-3">Şifreniz Tekrar</label>
+                                <div class="col-md-6 col-sm-6 col-xs-12">
+                                    <input id="password" type="password" asp-for="ConfirmPassword" data-validate-length="6,8" class="form-control col-md-7 col-xs-12" required="required">
+                                </div>
+                            </div>
                             </div>
                             <div class="item form-group">
                                 <label for="password2" class="control-label col-md-3 col-sm-3 col-xs-12">Şifre Tekrar</label>
@@ -134,7 +140,7 @@
                 </div>
             </div>
         </div>
-    </div>
+    
 </div>
 
 
