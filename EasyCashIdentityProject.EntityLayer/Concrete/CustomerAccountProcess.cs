@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore.Storage.ValueConversion.Internal;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -18,5 +19,6 @@ namespace EasyCashIdentityProject.EntityLayer.Concrete
 		public int? ReceiverID { get; set; }
 		public CustomerAccount SenderCustomer { get; set; }
 		public CustomerAccount ReceiverCustomer { get; set; }
-	}
+        public String Description  { get; set; }
+    }
 }

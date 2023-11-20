@@ -4,6 +4,7 @@ using EasyCashIdentityProject.DtoLayer.Dtos.CustomerAccountProcessDtos;
 using EasyCashIdentityProject.EntityLayer.Concrete;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using System;
 
 namespace EasyCashIdentityProject.PresentationLayer.Controllers
 {
@@ -34,16 +35,25 @@ namespace EasyCashIdentityProject.PresentationLayer.Controllers
                 (x => x.CustomerAccountNumber == sendMoneyForCustomerAccountProcessDto.ReciverAccountNumber).Select
                 (y => y.CustomerAccoundID).FirstOrDefault();
 
-            sendMoneyForCustomerAccountProcessDto.SenderID = user.Id;
-            sendMoneyForCustomerAccountProcessDto.ProcessDate = Convert.ToDateTime(DateTime.Now.ToShortDateString());
-            sendMoneyForCustomerAccountProcessDto.ProcessType = "Havale";
-            sendMoneyForCustomerAccountProcessDto.ReceiverID = reciverAccountNumberID;
+            var senderAccountNumberID = context.CustomerAccounts.Where(x => x.AppUserID == user.Id).Where(y => y.CustomerAccountCurrency 
+            == "Türk Lıirası").Select(z => z.CustomerAccoundID).FirstOrDefault();
 
-           // _customerAccountProcessService.TInsert();
+            // _customerAccountProcessService.TInsert();
 
+            var values = new CustomerAccountProcess();
+            values.ProcessDate = Convert.ToDateTime(DateTime.Now.ToShortDateString());
+            values.SenderID = senderAccountNumberID;
+            values.ProcessType = "Havale";
+            values.Amount = sendMoneyForCustomerAccountProcessDto.Amount;
+            values.Description = sendMoneyForCustomerAccountProcessDto.Description;
+              
+
+            _customerAccountProcessService.TInsert(values);
 
 
             return RedirectToAction("Index", "Deneme");
+
+            [HttpGet]
         }
     }
 }
